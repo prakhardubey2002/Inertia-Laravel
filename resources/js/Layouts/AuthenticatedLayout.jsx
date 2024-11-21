@@ -4,9 +4,9 @@ import { useEffect } from "react";
 
 export default function Authenticated({ header, children }) {
     const user = usePage().props.auth.user;
-    useEffect(() => {
-        console.log(user);
-    }, []);
+    // useEffect(() => {
+    //     console.log(user);
+    // }, []);
     return (
         <div className="container-fluid ">
             <div className="row">
