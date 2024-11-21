@@ -7,6 +7,7 @@ export default function Add({ auth }) {
         name: "",
         buyingPrice: "",
         sellingPrice: "",
+        image: null,
     });
     function submit(e) {
         e.preventDefault();
@@ -36,6 +37,12 @@ export default function Add({ auth }) {
                     type="text"
                     value={data.sellingPrice}
                     onChange={(e) => setData("sellingPrice", e.target.value)}
+                />
+                <input
+                    className="form-control"
+                    type="file"
+                    name="image"
+                    onChange={(e) => setData("image", e.target.files[0])}
                 />
                 <button className="btn btn-success" type="submit">
                     Save
