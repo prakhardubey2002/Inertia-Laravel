@@ -9,7 +9,17 @@ class ProductsController extends Controller
 {
     public function index(Request $request)
     {
-        $products=Products::select('id','name','image','buyingPrice','sellingPrice')->get();
+        $query=Products::select('id','name','image','buyingPrice','sellingPrice');
+        if($request -> has('name')){
+            $query-> where('name','like','%'. $request->name.'%' );
+        };
+        if($request -> has(key: 'buyingPrice')){
+            $query-> where('buyingPrice','like','%'. $request->buyingPrice.'%' );
+        };
+        if($request -> has(key: 'sellingPrice')){
+            $query-> where('sellingPrice','like','%'. $request->sellingPrice.'%' );
+        };
+        $products=$query->paginate(2);
         return inertia('Products/Index',[
             'products'=>$products,
         ]);
