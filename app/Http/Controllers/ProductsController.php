@@ -60,4 +60,9 @@ class ProductsController extends Controller
         return redirect('products')->with('success', 'Product Edited Successfully');
 
     }
+    public function show($id)
+    {
+        $product = Products::findOrFail($id);
+        return inertia('Products/Show', compact('product'));
+    }
 }
