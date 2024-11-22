@@ -5,6 +5,7 @@ use App\Http\Requests\ProductsRequest;
 use App\Http\Requests\ProductUpdateRequest;
 use App\Models\Products;
 use Illuminate\Http\Request;
+use Storage;
 
 class ProductsController extends Controller
 {
@@ -64,5 +65,14 @@ class ProductsController extends Controller
     {
         $product = Products::findOrFail($id);
         return inertia('Products/Show', compact('product'));
+    }
+    public function delete($id)
+    {
+        $item = Products::where('id', $id)->first();
+        if($item->image){
+            Storage::disk('public')->delete($item->image);
+        }
+        $item->delete();
+        return redirect('products')->with('success','Product Deleted Successfully');
     }
 }

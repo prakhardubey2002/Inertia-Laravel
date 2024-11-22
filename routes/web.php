@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function () {
         Route::get('edit/{id}','edit');
         Route::post('update','update')->name('products.update');
         Route::get('show/{id}','show');
+        Route::delete('delete/{id}','delete');
     });
 });
 

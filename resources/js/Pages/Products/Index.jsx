@@ -4,13 +4,18 @@ import React, { useEffect } from "react";
 import Pagination from "@/Components/Pagination";
 export default function Index({ products }) {
     const auth = usePage().props.auth;
-    function handleDelete(id) {}
-    const { data, setData,get } = useForm({
+   
+    const { data, setData,get,delete:destroy } = useForm({
         page: products.current_page,
         name: "",
         buyingPrice: "",
         sellingPrice: "",
     });
+    const handleDelete=(productId)=> {
+        if(confirm("Are You sure you want to delete?")){
+            destroy(`/products/delete/${productId}`)
+        }
+    }
     const handleFilterChange = (e) => {
         setData(e.target.name, e.target.value);
     };
