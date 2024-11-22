@@ -39,7 +39,7 @@ class ProductsController extends Controller
         $product->image = $imagePath; // Save the image path
         $product->save();
 
-        return redirect('dashboard')->with('success', 'Product added successfully');
+        return redirect('dashboard')->with(['success'=> 'Product added successfully']);
     }
     public function edit($id)
     {
@@ -73,6 +73,6 @@ class ProductsController extends Controller
             Storage::disk('public')->delete($item->image);
         }
         $item->delete();
-        return redirect('products')->with('success','Product Deleted Successfully');
+        return redirect('products')->with(['success'=>'Product Deleted Successfully']);
     }
 }

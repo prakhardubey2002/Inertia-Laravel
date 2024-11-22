@@ -2,7 +2,9 @@ import Authenticated from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, useForm, usePage } from "@inertiajs/react";
 import React, { useEffect } from "react";
 import Pagination from "@/Components/Pagination";
-export default function Index({ products }) {
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+export default function Index({ products,flash }) {
     const auth = usePage().props.auth;
    
     const { data, setData,get,delete:destroy } = useForm({
@@ -31,10 +33,19 @@ export default function Index({ products }) {
         }, 300);
         return ()=>clearTimeout(timeoutId)
     },[data])
-    console.log(products)
+    useEffect(()=>{
+        if(flash.message.success){
+            toast.success(flash.message.success);
+        }else if(flash.message.error){
+            toast.error(flash.message.error);
+            
+        }
+    },[])
+    // console.log(products)
     return (
         <Authenticated user={auth.user} header={<h2>Products </h2>}>
             <Head title="Products" />
+            <ToastContainer />
             <table className="table">
                 <thead>
                     <tr>
